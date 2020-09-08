@@ -41,5 +41,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>需要访问您的蓝牙发送指令到设备</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>需要访问您的蓝牙发送指令到设备</string>
 </dict>
 </plist>
