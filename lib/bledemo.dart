@@ -10,52 +10,84 @@ class BleDemo extends StatelessWidget {
   List<Command> _commands(BuildContext context) {
     return [
       Command(
-        title: "one_title",
-        subtitle: "one_title_sub",
+        title: "搜索",
+        subtitle: "搜索ad10",
       ),
       Command(
-        title: "two_title",
-        subtitle: "two_title_sub",
+        title: "配置",
+        subtitle: "扫描",
       ),
       Command(
-        title: "three_title",
-        subtitle: "three_title_sub",
+        title: "数据流",
+        subtitle: "数据流支持项",
       ),
       Command(
-        title: "placeTanjore",
-        subtitle: "placeThanjavurTemple",
+        title: "转速",
+        subtitle: "发动机转速",
       ),
       Command(
-        title: "placeTanjore",
-        subtitle: "placeThanjavurTemple",
+        title: "电压",
+        subtitle: "设备电压",
       ),
       Command(
-        title: "placePondicherry",
-        subtitle: "placeSaltFarm",
+        title: "boxinfo",
+        subtitle: "设备信息",
       ),
       Command(
-        title: "placeChennai",
-        subtitle: "placeScooters",
+        title: "vin码",
+        subtitle: "发动机vin码",
       ),
       Command(
-        title: "placeChettinad",
-        subtitle: "placeSilkMaker",
+        title: "故障灯",
+        subtitle: "故障灯和就绪状态",
       ),
       Command(
-        title: "placeChettinad",
-        subtitle: "placeLunchPrep",
+        title: "冻结帧",
+        subtitle: "冻结帧列表",
       ),
       Command(
-        title: "placeTanjore",
-        subtitle: "placeMarket",
+        title: "车速",
+        subtitle: "冻结帧的车速",
       ),
       Command(
-        title: "placePondicherry",
-        subtitle: "placeBeach",
+        title: "initBin",
+        subtitle: "初始化bin文件",
       ),
       Command(
-        title: "placePondicherry",
-        subtitle: "placeFisherman",
+        title: "烧录",
+        subtitle: "开始烧录",
+      ),
+      Command(
+        title: "canstd",
+        subtitle: "标准can进入",
+      ),
+      Command(
+        title: "canext",
+        subtitle: "扩展can进入",
+      ),
+      Command(
+        title: "iso",
+        subtitle: "ISO协议进入",
+      ),
+      Command(
+        title: "kwp",
+        subtitle: "KWP进入",
+      ),
+      Command(
+        title: "PWM",
+        subtitle: "PWM协议进入",
+      ),
+      Command(
+        title: "VPW",
+        subtitle: "VPW协议进入",
+      ),
+      Command(
+        title: "故障码",
+        subtitle: "故障码",
+      ),
+      Command(
+        title: "清码",
+        subtitle: "清码",
       ),
     ];
   }
@@ -68,7 +100,7 @@ class BleDemo extends StatelessWidget {
         title: Text("ble"),
       ),
       body: GridView.count(
-        crossAxisCount: 2,
+        crossAxisCount: 4,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
         padding: const EdgeInsets.all(8),
@@ -121,31 +153,10 @@ class _GridDemoPhotoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget image = Material(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-      clipBehavior: Clip.antiAlias,
-      child: Image.asset(
-        "imgs/timg.jpeg",
-        fit: BoxFit.cover,
-      ),
-    );
 
     return GestureDetector(
       onTap: ()=>print("def"),
-      child: GridTile(
-          header: Material(
-            color: Colors.transparent,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: GridTileBar(
-              title: _GridTitleText(cmd.title),
-              backgroundColor: Colors.black45,
-            ),
-          ),
-          child: image
-      ),
+      child: Center(child: Text(cmd.title))
     );
   }
 }
