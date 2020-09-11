@@ -46,6 +46,7 @@ class DeviceState extends State<DeviceList> {
         automaticallyImplyLeading: false,
         title: Text("蓝牙设备列表"),
       ),
+      drawer: new MyDrawer(),
       body: Scrollbar(
         child: Column(
           children: [

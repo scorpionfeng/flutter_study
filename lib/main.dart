@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutterStudy/StreamBuildDemo.dart';
+import 'package:flutterStudy/sca.dart';
+import 'package:flutterStudy/widgets/MyApp.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:math';
+import 'common/Global.dart';
+import 'dock.dart';
 import 'gridlist.dart';
 import 'devicelist.dart';
 import 'FutureBuildDemo.dart';
 import 'InheritedWidgetTestRouteState.dart';
 import 'provider/ProviderRoute.dart';
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  Global.init().then((value) => runApp(MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyAppX extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -86,9 +91,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(context,new MaterialPageRoute(builder: (context){
                     return new InheritedWidgetTestRoute();
                   }));}),
+                FlatButton(child: Text("dock"),textColor: Colors.blue,onPressed: (){
+                  Navigator.push(context,new MaterialPageRoute(builder: (context){
+                    return new BottomAppBarDemo();
+                  }));}),
                 FlatButton(child: Text("stream builder"),textColor: Colors.blue,onPressed: (){
                   Navigator.push(context,new MaterialPageRoute(builder: (context){
                     return new StreamBuildDemo();
+                  }));}),
+                FlatButton(child: Text("tab"),textColor: Colors.blue,onPressed: (){
+                  Navigator.push(context,new MaterialPageRoute(builder: (context){
+                    return new ScaffoldRoute();
                   }));}),
                 FlatButton(child: Text("provider"),textColor: Colors.blue,onPressed: (){
                   Navigator.push(context,new MaterialPageRoute(builder: (context){
