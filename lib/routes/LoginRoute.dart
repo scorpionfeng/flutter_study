@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterStudy/common/Git.dart';
@@ -9,7 +11,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 class LoginRoute extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _LoginRouteState();
   }
 }
@@ -19,7 +20,7 @@ class _LoginRouteState extends State<LoginRoute>{
   TextEditingController _unameController=TextEditingController();
   TextEditingController _pwdController=TextEditingController();
   bool pwdShow=false;
-  GlobalKey _formKey=GlobalKey<FormState>();
+  GlobalKey _formKey=new GlobalKey<FormState>();
   bool _nameAutoFocus=true;
 
   @override
@@ -38,15 +39,18 @@ class _LoginRouteState extends State<LoginRoute>{
       appBar: AppBar(title: Text("login"),),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child: Form(
+            key: _formKey,
+            autovalidate: true,
+            child: Column(
           children: <Widget>[
             TextFormField(
               autofocus: _nameAutoFocus,
               controller: _unameController,
               decoration: InputDecoration(
-                labelText: "username",
-                hintText: "username or email",
-                prefixIcon: Icon(Icons.person)
+                  labelText: "username",
+                  hintText: "username or email",
+                  prefixIcon: Icon(Icons.person)
               ),
               validator: (v){
                 return v.trim().isNotEmpty? null: "需要用户名";
@@ -56,17 +60,17 @@ class _LoginRouteState extends State<LoginRoute>{
               autofocus: !_nameAutoFocus,
               controller: _pwdController,
               decoration: InputDecoration(
-                labelText: "password",
-                hintText: "password ",
-                prefixIcon: Icon(Icons.lock),
-                suffixIcon: IconButton(
-                  icon:Icon(pwdShow?Icons.visibility_off:Icons.visibility),
-                  onPressed: (){
-                    setState(() {
-                      pwdShow=!pwdShow;
-                    });
-                  },
-                )
+                  labelText: "password",
+                  hintText: "password ",
+                  prefixIcon: Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    icon:Icon(pwdShow?Icons.visibility_off:Icons.visibility),
+                    onPressed: (){
+                      setState(() {
+                        pwdShow=!pwdShow;
+                      });
+                    },
+                  )
               ),
               obscureText: !pwdShow,
               validator: (v){
@@ -78,20 +82,21 @@ class _LoginRouteState extends State<LoginRoute>{
               child: ConstrainedBox(
                 constraints: BoxConstraints.expand(height: 55),
                 child: RaisedButton(
-                  color: Theme.of(context).primaryColor,
-                  onPressed: _onLogin,
-                  textColor: Colors.white,
-                  child:Text("login")
+                    color: Theme.of(context).primaryColor,
+                    onPressed: _onLogin,
+                    textColor: Colors.white,
+                    child:Text("login")
                 ),
               ),
             )
           ],
-        ),
+        )),
       ),
     );
   }
 
   void _onLogin() async{
+    print(_formKey.currentState.mounted);
     if((_formKey.currentState as FormState).validate()){
       showLoading();
       User user;

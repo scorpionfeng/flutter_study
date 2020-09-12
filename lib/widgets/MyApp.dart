@@ -8,6 +8,8 @@ import 'package:flutterStudy/routes/language_lage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../main.dart';
+
 class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,8 @@ class MyApp extends StatelessWidget{
             routes: <String,WidgetBuilder>{
               "login":(context)=>LoginRoute(),
               "themes":(context)=>ThemeChangeRoute(),
-              "language":(context)=>LanguageRoute()
+              "language":(context)=>LanguageRoute(),
+              "guest":(context)=>MyAppX()
             },
           );
         },

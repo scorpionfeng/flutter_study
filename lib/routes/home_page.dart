@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 class HomeRoute extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _HomeRouteState();
   }
 }
@@ -19,7 +18,6 @@ class HomeRoute extends StatefulWidget{
 class _HomeRouteState extends State<HomeRoute>{
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(title: Text("实战"),),
       body: _buildBody(),
@@ -31,14 +29,23 @@ class _HomeRouteState extends State<HomeRoute>{
     UserModel userModel=Provider.of<UserModel>(context);
     if(!userModel.isLogin){
       return Center(
-        child: RaisedButton(
-          child: Text("login"),
-          onPressed: ()=>Navigator.of(context).pushNamed("login"),
+        child: Column(
+          children: <Widget>[
+            RaisedButton(
+              child: Text("login"),
+              onPressed: ()=>Navigator.of(context).pushNamed("login"),
+            ),
+            RaisedButton(
+              child: Text("试用"),
+              onPressed: ()=>Navigator.of(context).pushNamed("guest"),
+            ),
+          ],
         ),
       );
     }else{
       return InfiniteListView<Repo>(
         onRetrieveData: (int page,List<Repo> items,bool refresh) async{
+          print("start get repo list");
           var data= await Git(context).getRepos(
             refresh:refresh,
               queryParameters:{
@@ -46,8 +53,11 @@ class _HomeRouteState extends State<HomeRoute>{
                 'page_size':20,
               }
           );
-          items.addAll(data);
-          return data.length==20;
+          if(data.length>0){
+            items.addAll(data);
+          }
+
+          return data.length>0;
         },
         itemBuilder: (List list,int index,BuildContext ctx){
           return RepoItem(list[index]);
@@ -153,7 +163,7 @@ class _RepoItemState extends State<RepoItem>{
     BoxFit fit,
     BorderRadius borderRadius,
 }){
-    var placeholder=Image.asset("imgs/avatar-default.png",width: width,height: height);
+    var placeholder=Image.asset("imgs/timg.jpeg",width: width,height: height);
     return ClipRRect(
       borderRadius: borderRadius??BorderRadius.circular(2),
       child: CachedNetworkImage(

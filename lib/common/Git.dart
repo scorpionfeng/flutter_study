@@ -74,11 +74,21 @@ class Git {
       // 列表下拉刷新，需要删除缓存（拦截器中会读取这些信息）
       _options.extra.addAll({"refresh": true, "list": true});
     }
-    var r = await dio.get<List>(
-      "user/repos",
-      queryParameters: queryParameters,
-      options: _options,
-    );
-    return r.data.map((e) => Repo.fromJson(e)).toList();
+    var r;
+    try{
+       r = await dio.get<List>(
+        "user/repos",
+        queryParameters: queryParameters,
+        options: _options,
+      );
+    }catch(e){
+      print(e.toString());
+    }
+    if(r!=null) return r.data.map<Repo>((e)=>Repo.fromJson(e)).toList();
+    else return Future.value(List<Repo>());
+
+
+ //   return r?.data.map((e) => Repo.fromJson(e)).toList() ?? List<Repo>();
+  //  return r?.data?.map((e) => Repo.fromJson(e))?.toList() ?? List();
   }
 }

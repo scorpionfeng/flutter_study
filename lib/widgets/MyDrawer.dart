@@ -109,7 +109,7 @@ class MyDrawer extends StatelessWidget {
     BorderRadius borderRadius,
   }) {
     var placeholder =
-        Image.asset("imgs/avatar-default.png", width: width, height: height);
+        Image.asset("imgs/timg.jpeg", width: width, height: height);
     return ClipRRect(
       borderRadius: borderRadius ?? BorderRadius.circular(2),
       child: CachedNetworkImage(
